@@ -36,6 +36,35 @@ function fetchAllQuestions() {
         .catch((err) => console.log("An error Occurred "+err))  
 }
 
+//Delete Question
+function deleteQuestion(e){
+    return new Promise((resolve, reject) => {
+    var question_id=e.id;
+    fetch('http://127.0.0.1:5000/api/v1/questions/'+question_id,{
+        method: 'DELETE',
+        mode:'cors',
+        headers: { 'Content-Type': 'application/json',
+        'Authorization':'Bearer '+ window.localStorage.getItem('auth_token')},
+    })
+    .then(data => {
+        return data.json();
+    })
+    .then(data => {
+        if (data.status == 200){
+            var currentUser = users.username;
+            var  user= users.user_id;
+            if(currentUser == user){
+                resolve(data);
+            }
+            else{
+                alert("Unauthorized, You cannot delete this question!");
+            }  
+        } 
+    })
+    .catch(err => reject(err));
+});
+    }
+
 //show answer
 function showAnswers(e){
    var question_id=e.id;
@@ -81,7 +110,7 @@ function displayAnswer(answers) {
 }
 //post answer textarea
 function displayTextArea(question_id){
-        var html="<br/><h4>Answer this question</h4>"
+        var html=""
         +"<textarea id='answerBody' placeholder='Add Answer' required= true;></textarea>"
         +"<br>"
         +"<button class='button' id='"+question_id+"' onclick='addAnswer(this)'>Post Answer</button>"
@@ -112,5 +141,13 @@ function addAnswer(e){
     .catch(err => reject(err));
     showAnswers({id:id});
     window.location.reload
+    
+
 });
+}
+
+function editAnswerBtn(){
+    var html = "<p></p>"
+    +"<button id='edit' onclick= 'editAnswer(this)' class='button'>Edit Answer</button>";
+    document.getElementById('edit').innerHTML=html;
 }
