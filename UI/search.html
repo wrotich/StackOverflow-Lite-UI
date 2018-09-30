@@ -3,7 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Questions</title>
+    <title>Search Results</title>
     <link href="style.css" rel="stylesheet" />
 </head>
 
@@ -11,13 +11,12 @@
     
     <div class="container">
     <div class="topnav">
-
             <a href="recentquestions.html">StackOverflow-Lite</a>
-            <a class="active" href="all_questions.html">All Questions</a>
+            <a href="all_questions.html">All Questions</a>
             <a href="submit_question.html">Submit Question</a>  
             <a href="profile.html">Profile</a>
             <a href="login.html" style="float: right">Logout</a>
-            <form id="search-form_3">
+            <form id="search-form_3" class="active" method="POST">
                     <input type="text" class="search_3" placeholder="Search..." required/>
                     <input id="searchRes" type="submit" class="submit_3" value="Search" />
                     </form>
@@ -27,15 +26,12 @@
 
 
             <div class="full_12">
-                <div class="content" id="all_questions">
+                <div class="content" id="search">
                    </div>
 
                    </div>
                    </div>
                    </div>
-            
-                   
-<script src="js/all_questions.js"></script>
 <script src="js/search.js"></script>
 </body>
 </html>
