@@ -1,7 +1,7 @@
 window.addEventListener("onload", displayQuestions);
 function displayQuestions(){
     return new Promise((resolve, reject) => {
-        fetch('http://127.0.0.1:5000/api/v1/questions',{ 
+        fetch('http://127.0.0.1:5000/api/v1/questions/',{ 
             method: 'GET',
             mode:'cors',
             headers: { 'Content-Type': 'application/json',

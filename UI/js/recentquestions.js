@@ -1,7 +1,7 @@
 window.addEventListener('load', fetchAllQuestions);
 // Handles the retrieval of the recently asked questions from the db
 function fetchAllQuestions() { 
-    fetch('http://127.0.0.1:5000/api/v1/questions', {
+    fetch('https://stackoverflow-lite-ch3.herokuapp.com/api/v1/questions/', {
         method: 'GET',
         mode:'cors',
         headers: { 'Content-Type': 'application/json',

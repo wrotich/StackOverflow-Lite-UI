@@ -5,7 +5,7 @@ html {
   }
 body {
     margin:0px;
-    margin-top: 5px;
+    /* margin-top: 5px; */
     background: #648880;
     background: radial-gradient(#AAABBB, rgb(71, 116, 184));
     background-size: 100% 110%;  
@@ -15,8 +15,8 @@ body {
 }
 
 .container {
-    margin-right: auto;
-    margin-left: auto;
+    /* margin-right: auto;
+    margin-left: auto; */
     font-size: 1.2em;
     color: rgb(7, 7, 7);
 }
@@ -29,7 +29,7 @@ body {
   float: left;
   color: #f2f2f2;
   text-align: center;
-  padding: auto;
+  /* padding: auto; */
   text-decoration: none;
   font-size: 20px;
 }

@@ -1,7 +1,7 @@
 
 window.addEventListener('load', fetchAllQuestions);
 function fetchAllQuestions() { 
-    fetch('https://stackoverflow-lite-ch3.herokuapp.com/api/v1/questions/', {
+    fetch('http://127.0.0.1:5000/api/v1/questions', {
         method: 'GET',
         mode:'cors',
         headers: { 'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ function fetchAllQuestions() {
 function deleteQuestion(e){
     return new Promise((resolve, reject) => {
     var question_id=e.id;
-    fetch('https://stackoverflow-lite-ch3.herokuapp.com/api/v1/questions/'+question_id,{
+    fetch('http://127.0.0.1:5000/api/v1/questions/'+question_id,{
         method: 'DELETE',
         mode:'cors',
         headers: { 'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ function deleteQuestion(e){
 //show answer
 function showAnswers(e){
    var question_id=e.id;
-   fetch('https://stackoverflow-lite-ch3.herokuapp.com/api/v1/questions/'+question_id, {
+   fetch('http://127.0.0.1:5000/api/v1/questions/'+question_id, {
        method: 'GET',
        mode:'cors',
        headers: { 'Content-Type': 'application/json',
@@ -131,7 +131,7 @@ function addAnswer(e){
     var data = JSON.stringify({
       "answer_body": answer_body
   });
-  fetch("https://stackoverflow-lite-ch3.herokuapp.com/api/v1/questions/"+id+"/answers",{
+  fetch("http://127.0.0.1:5000/api/v1/questions/"+id+"/answers",{
         method: 'POST',
         mode:'cors',
         body: data,

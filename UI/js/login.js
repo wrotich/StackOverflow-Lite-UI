@@ -29,7 +29,7 @@ function login(event){
     if (data.message == 'Successfully logged in.') {
       window.localStorage.setItem('auth_token', data.auth_token)
       console.log(window.localStorage.getItem('auth_token'))
-      window.location = 'recentquestions.html'
+      window.location = 'all_questions.html'
   }
     else {
       document.getElementById("error").innerHTML = "Wrong credentials please try again";
