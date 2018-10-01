@@ -15,7 +15,7 @@ function registration(evt)
         "password":password,
         "confirmPassword":confirmPassword
     });
-            fetch('http://127.0.0.1:5000/api/v1/auth/signup',{
+            fetch('https://stackoverflow-lite-ch3.herokuapp.com/api/v1/auth/signup',{
               method: 'POST',
               headers: {'Content-Type': 'application/json'},  
               mode: "cors",

@@ -10,7 +10,7 @@ function login(event){
     })
 
     console.log("before fetch")
-    fetch('http://127.0.0.1:5000/api/v1/auth/login', {
+    fetch('https://stackoverflow-lite-ch3.herokuapp.com/api/v1/auth/login', {
         method: 'POST',
         mode: "cors",
         headers: {'Content-Type': 'application/json'},

@@ -1,7 +1,7 @@
 document.getElementById('search-form_3').addEventListener('submit', searchResult);
 function searchResult() { 
     return new Promise((resolve, reject) => {
-    fetch('http://127.0.0.1:5000/api/v1/questions/results',{
+    fetch('https://stackoverflow-lite-ch3.herokuapp.com/api/v1/questions/results',{
         method: 'GET',
         headers: {'Authorization':'Bearer '+ window.localStorage.getItem('auth_token')},
     })

@@ -1,7 +1,7 @@
 window.addEventListener('load', deleteQuestion);
 function deleteQuestion(question_id) { 
 
-    fetch('http://127.0.0.1:5000/api/v1/question/'+ question_id, {
+    fetch('https://stackoverflow-lite-ch3.herokuapp.com/api/v1/questions/'+ question_id, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json',
         'Authorization':'Bearer '+ window.localStorage.getItem('auth_token')},   
