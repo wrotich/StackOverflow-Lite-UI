@@ -28,7 +28,7 @@ function registration(evt)
                 })
                 .then((response) => {
                     if (status_code == 201){
-                        window.location = 'login.html';
+                        window.location = 'index.html';
                     }
                     if (status_code == 401){
                         document.getElementById("error").innerHTML = "User already exists please login";
