@@ -15,7 +15,7 @@
  
     	<div class="topnav">
     		
-            <a href="all_questions.html">All Questions</a>
+            <a href="all_questions.html">StackOverflow Lite</a>
             <a href="submit_question.html">Submit Question</a>
             <a class="active" href="profile.html" style="float: right">Profile</a>	
             <a href="login.html" style="float: right">Logout</a>
@@ -29,7 +29,7 @@
                                  <div class="row">
                                     <div class="column">
                                  <div class="box">
-                                   <img src="imgs/Preguntas.jpg" class="box-img">
+                                   <img src="imgs/wallpaper.jpg" class="box-img">
                                    <h2>Star Prof</h2>
                                    <h4>Software Developer</h4>
                                    <h6>I love Software development</h6>
@@ -45,29 +45,22 @@
                       </div>
                     </div>
 <div class="column1" style="background-color:rgb(212, 193, 193);">
-<div class="wrapper">
-  <div class="panel">
-    <!-- <div class="panel-header">
-      <h3 class="title">Statistics</h3> -->
-      <div class="panel-body">
-          <div class="categories">
-            <div class="category">
-              <span>Questions Asked</span>
-              <span>3</span>
-            </div>
-            <div class="category">
-              <span>Answers Given</span>
-              <span>12</span>
-            </div>
-            <div class="category">
-              <span>Questions with most Answers</span>
-              <span>2</span>
-            </div>
-          </div>
-          </div>
-        </div>
-          <div class="panel-header">
-            <h3 class="title">Recently Asked Questions</h3>
+      <div class="panel-body" id="all_questions">
+            <h3 class="title">Asked Questions</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Question</th>
+                        <th>Date Posted</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="questions"></tr>
+                       
+                </tbody>
+            </table>
             </div>
             </div>
             </div>
