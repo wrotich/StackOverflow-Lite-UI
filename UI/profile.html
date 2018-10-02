@@ -13,17 +13,18 @@
 
     <div class="container-fluid">
  
-    	<div class="topnav">
-    		
-            <a href="all_questions.html">StackOverflow Lite</a>
-            <a href="submit_question.html">Submit Question</a>
-            <a class="active" href="profile.html" style="float: right">Profile</a>	
-            <a href="login.html" style="float: right">Logout</a>
-            <form id="search-form_3">
-                    <input type="text" class="search_3" placeholder="Search..." required/>
-                    <input type="submit" class="submit_3" value="Search" />
-                    </form>
-    	</div>
+            <div class="topnav">
+                    <a class="active" href="all_questions.html">StackOverflow Lite</a>
+                <div class="dropdown">
+                    <button class="dropbtn">user
+                    </button>
+                    <div class="dropdown-content">
+                    <a href="submit_question.html">Submit Question</a>
+                    <a href="profile.html">My Account</a>
+                    <a href="index.html">Logout</a>
+            </div>
+          </div>
+                </div>
 
         <div class="full_12">
                                  <div class="row">
@@ -44,23 +45,10 @@
                         </div>
                       </div>
                     </div>
-<div class="column1" style="background-color:rgb(212, 193, 193);">
+<div class="column1" >
       <div class="panel-body" id="all_questions">
             <h3 class="title">Asked Questions</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Question</th>
-                        <th>Date Posted</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr id="questions"></tr>
-                       
-                </tbody>
-            </table>
+            
             </div>
             </div>
             </div>
