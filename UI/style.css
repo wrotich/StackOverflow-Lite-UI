@@ -1,3 +1,4 @@
+/* @import "custom.css"; */
 html {
     font-family: sans-serif;
     -webkit-text-size-adjust: 100%;
@@ -14,9 +15,20 @@ body {
     background-repeat: no-repeat;
 }
 
+/* .container {
+    /* font-size: 1.2em; */
+    /* color: rgb(7, 7, 7); */
+/* } */ 
 .container {
-    font-size: 1.2em;
-    color: rgb(7, 7, 7);
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.blockquote {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
 }
 .topnav {
   background-color: #333;
@@ -27,23 +39,30 @@ body {
 .topnav a {
   float: left;
   color: #f2f2f2;
-  text-align: center;
+  /* text-align: center; */
   text-decoration: none;
   font-size: 15px;
 }
 .topnav a:hover {
-  background-color: #ddd;
+  background-color: rgb(47, 190, 155);
   color: black;
 
 }
+.sixteen_px{
+  padding:16px !important;
+}
+.six_px{
+  padding:6px !important;
+}
 .topnav a.active{
-  background-color: #f124a3;
+  /* background-color: #f124a3; */
   color: white;
+  background-color: rgb(47, 190, 155);
 }
 #search-form_3 {
-  background: #e1e1e1; /* Fallback color for non-css3 browsers */
+  background:rgb(47, 190, 155);
   width: 365px;
-  margin: 7px;
+  margin: auto;
   float: right;
   
   /* Gradients */
@@ -161,7 +180,7 @@ body {
   a:hover,
   a:focus {
     color: #23527c;
-    text-decoration: underline;
+  
   }
 
 
@@ -352,16 +371,19 @@ ul{
 .dropbtn {
   background-color: #4CAF50;
   color: white;
-  padding: 16px;
+  padding: 0px;
   font-size: 16px;
-  border: none;
+  margin-top: 0px;
+ 
   
 }
 
 .dropdown {
   float: left;
   overflow: hidden;
-  float: right;
+  float: left;
+  margin: auto;
+  
 }
 
 .dropdown .dropbtn {
@@ -372,7 +394,7 @@ ul{
   padding: 14px 16px;
   background-color: inherit;
   font-family: inherit;
-  margin: 0;
+  margin: auto;
 }
 
 .dropdown-content {
@@ -394,17 +416,17 @@ ul{
 }
 
 .dropdown:hover .dropbtn {
-background-color: rgb(52, 175, 124);
+background-color: rgb(47, 190, 155);
 color: white;
 }
 
 .dropdown-content a:hover {
-  background-color: rgb(52, 175, 124);
+  background-color: rgb(47, 190, 155);
   color: black;
 }
 
 .dropdown:hover .dropdown-content {
-  display: block;
+  display: block !important;
 }
 
 @media screen and (max-width: 600px) {
@@ -436,4 +458,42 @@ color: white;
   width: 100%;
   text-align: left;
 }
+}
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
