@@ -15,6 +15,10 @@
  
             <div class="topnav">
                     <a class="active" href="all_questions.html">StackOverflow Lite</a>
+                    <!-- <form id="search-form_3">
+                            <input type="text" class="search_3" placeholder="Search..." required/>
+                            <input id="searchRes" type="submit" class="submit_3" value="Search" />
+                            </form> -->
                 <div class="dropdown">
                     <button class="dropbtn">user
                     </button>
@@ -48,7 +52,20 @@
 <div class="column1" >
       <div class="panel-body" id="all_questions">
             <h3 class="title">Asked Questions</h3>
-            
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Question</th>
+                        <th>Date Posted</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="questions"></tr>
+                       
+                </tbody>
+            </table>
             </div>
             </div>
             </div>
