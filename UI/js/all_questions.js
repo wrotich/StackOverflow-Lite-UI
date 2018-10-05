@@ -90,13 +90,14 @@ function displayAnswer(answers) {
     rows.push("<span id='textarea_display'></span>");
     document.getElementById('answers').innerHTML = rows.join('');
     showAnswerActions(answers);
+    updateUserAnswer(answers)
 }
 //post answer textarea
 function displayTextArea(question_id) {
     var html = ""
-        + "<textarea id='answerBody' placeholder='Add Answer' required= true;></textarea>"
+        + "<textarea id='answerBody' class='input_control' style='margin-left:0%' placeholder='Add Answer' required= true;></textarea>"
         + "<br>"
-        + "<button class='button' id='" + question_id + "' onclick='addAnswer(this)'>Post Answer</button>"
+        + "<button class='btn btn-primary' id='" + question_id + "' onclick='addAnswer(this)'>Post Answer</button>"
         + "";
     document.getElementById('textarea_display').innerHTML = html;
 }
@@ -132,11 +133,12 @@ function addAnswer(e) {
 }
 //displays the edit and mark as preferred actions on an answer
 function showAnswerActions(answers) {
+    console.log(answers);
     answers.forEach(function (answer) {
         var id = 'actions_' + answer.answer_id;
-        var html = "<button id='myBtn'" + id + " onClick='function(this)'>Edit</button>";
+        var rows=[];
+        var html = "<button class='btn btn-primary' id='myBtn'" + id + " onClick='function(this)'>Edit</button>";
         document.getElementById(id).innerHTML = html;
-
         // Get the modal
         var modal = document.getElementById('myModal');
         // Get the button that opens the modal
@@ -157,6 +159,8 @@ function showAnswerActions(answers) {
                 modal.style.display = "none";
             }
         }
+        // rows.push(html);
+        // document.getElementById('updateanswer').innerHTML = rows.join('');
         updateUserAnswer();
     });
 }
