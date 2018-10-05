@@ -1,5 +1,6 @@
 
 document.getElementById('registration').addEventListener('submit', registration);
+var url = 'https://stackoverflow-lite-ch3.herokuapp.com/api/v1/';
 function registration(evt)
 {   
     evt.preventDefault();
@@ -15,7 +16,7 @@ function registration(evt)
         "password":password,
         "confirmPassword":confirmPassword
     });
-            fetch('https://stackoverflow-lite-ch3.herokuapp.com/api/v1/auth/signup',{
+            fetch(url+'auth/signup',{
               method: 'POST',
               headers: {'Content-Type': 'application/json'},  
               mode: "cors",
