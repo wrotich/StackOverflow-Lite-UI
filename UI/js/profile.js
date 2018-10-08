@@ -62,10 +62,26 @@ function deleteQuestion(e){
             })
             .then((response) => {
                 if (statusCode == 200){
+                    swal({
+                        title: "Are you sure?",
+                        text: "Once deleted, you will not be able to recover this Question!",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                      })
+                      .then((willDelete) => {
+                        if (willDelete) {
+                          swal("Ok! Your Question file has been deleted!", {
+                            icon: "success",
+                          });
+                        } else {
+                          swal("Your question is safe!");
+                        }
+                      });
                     alert(response.Message)
                 }
                 if (statusCode == 401){
-                    alert("You are not allowed to delete this question");
+                    swal("You are not allowed to delete this question");
                 }
     })    
     .catch(err => reject(err));
@@ -123,7 +139,7 @@ function displayAnswer(answers) {
 function showAnswerActions(answers) {
     answers.forEach(function (answer) {
         var id = 'actions_' + answer.answer_id;
-        var html = "<button id='myBtn'" + id + " onClick='function(this)'>Mark As Preferred</button>";
+        var html = "<button id='myBtn' class='btn btn-primary'" + id + " onClick='function(this)'>Mark As Preferred</button>";
         document.getElementById(id).innerHTML = html;
 
         markAsPreferred();
@@ -154,7 +170,8 @@ function markAsPreferred(answers) {
             })
             .then(data => {
                 if (status == 200){
-                resolve(data);
+                    
+                    resolve(data);
                 }
                 else{
                     document.write("Check if you posted this question")
@@ -166,3 +183,4 @@ function markAsPreferred(answers) {
 
     })
 }
+

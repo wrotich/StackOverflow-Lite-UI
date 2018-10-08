@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Questions</title>
     <link href="style.css" rel="stylesheet" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -35,7 +36,7 @@
             <div class="full_12">
                 <center><h4> Submit your question below </h4></center>
                 <div class="content">
-                    <form id="submitQuestion" action="recentquestions.html" method="GET">
+                    <form id="submitQuestion" class="submit" action="recentquestions.html" method="GET">
                         <label style="margin-left:25%">Title</label>
                         <textarea id="title" class="input_control" style="width: 50%" placeholder="Title" required></textarea>
                         <br/>

@@ -1,6 +1,6 @@
 
-document.getElementById('registration').addEventListener('submit', registration);
-var url = 'https://stackoverflow-lite-ch3.herokuapp.com/api/v1/';
+document.getElementById('signup').addEventListener('submit', registration);
+let url = 'https://stackoverflow-lite-ch3.herokuapp.com/api/v1/';
 function registration(evt)
 {   
     evt.preventDefault();

@@ -1,5 +1,5 @@
 document.getElementById('submitQuestion').addEventListener('submit', askQuiz);
-var url = 'https://stackoverflow-lite-ch3.herokuapp.com/api/v1/';
+let url = 'https://stackoverflow-lite-ch3.herokuapp.com/api/v1/';
 function askQuiz(evt)
 {   
     evt.preventDefault();
@@ -24,8 +24,13 @@ function askQuiz(evt)
     .then((response) => {
         if (code == 201){
             document.getElementById("submitQuestion").reset();
-            alert("Question successfully submitted.")
-            // return response.json();
+            swal({
+                title: "Success!",
+                text: "Question successfully submitted!",
+                icon: "success",
+              });
+            // alert("Question successfully submitted.")
+            // // return response.json();
 
         }
         if (code == 401){

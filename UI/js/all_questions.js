@@ -24,58 +24,59 @@ function fetchAllQuestions() {
                 var all_questions = ["<p>" + img + "<span style='font-size:30px;'> Questions</span></p>"];
                 data.forEach(function (question, i) {
                     i = parseInt(i) + 1;
-                    var my_question = "<h3 onclick='showAnswers(this);'"
-                        + "id='" + question.question_id + "' key='" + question.question_id + "'>"
+                    var question_id = question.question_id;
+                    var my_question = "<h3 onclick='showAnswers(" + question_id + ");'"
+                        + "id='" + question_id + "'>"
                         + "<a href='#'>" + i + ". " + question.title + "</a></h3>"
                         + "<p class='blockqoute'>" + question.body + "</p>"
-                        + "<span class='button' id='" + question.question_id + "'"
-                        + "onclick='showAnswers(this);'><button class='btn btn-primary'>View Answers >></button> </span></br><hr>"
-                    // +"<span class='button' id='"+question.question_id+"'"
+                        + "<span class='button btn btn-primary' id='" + question_id + "'"
+                        + "onclick='showAnswers(" + question_id + ");'>View Answers >> </span></br><hr>"
                     all_questions.push(my_question);
+
                 });
-                document.getElementById('all_questions').innerHTML = all_questions.join('')
+                document.getElementById('all_questions').innerHTML = all_questions.join('');
             }
             if (http_code == 401) {
                 alert(data.Message)
             }
-
         })
         .catch((err) => console.log("An error Occurred " + err));
 }
 
 //show answer
-function showAnswers(e) {
-    var question_id = e.id;
-    fetch(url + 'questions/' + question_id, {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + window.localStorage.getItem('auth_token')
-        },
+function showAnswers(question_id) {
+    if (question_id != '' && question_id != undefined) {
+        console.log(question_id.id);
+        fetch(url + 'questions/' + question_id, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + window.localStorage.getItem('auth_token')
+            },
 
-    })
-        .then((resp) => {
-            http_code = resp.status
-            return resp.json();
         })
-        .then((resp) => {
-            if (http_code == 200) {
-                resp = resp.results
-                var question = resp.question;
-                var answers = resp.answers;
-                var question = question[0];
-                document.getElementById('all_questions').innerHTML = "<h3>" + question.title + "</h3>"
-                    + "<p>" + question.body + "</p>"
-                    + "Posted on: " + question.created_at
-                    + "<h4>Answers (" + answers.length + ")</h4>"
-                    + "<span id='answers'></span>";
+            .then((resp) => {
+                http_code = resp.status
+                return resp.json();/////
+            })
+            .then((resp) => {
+                if (http_code == 200) {
+                    resp = resp.results
+                    var question = resp.question;
+                    var answers = resp.answers;
+                    var question = question[0];
+                    document.getElementById('all_questions').innerHTML = "<h3>" + question.title + "</h3>"
+                        + "<p>" + question.body + "</p>"
+                        + "Posted on: " + question.created_at
+                        + "<h4>Answers (" + answers.length + ")</h4>"
+                        + "<span id='answers'></span>";
+                    displayAnswer(answers);
+                    displayTextArea(question.question_id);
 
-                displayAnswer(answers);
-                displayTextArea(question.question_id);
-
-            }
-        });
+                }
+            });
+    }
 }
 
 //Display the answer after it has been posted
@@ -90,7 +91,7 @@ function displayAnswer(answers) {
     rows.push("<span id='textarea_display'></span>");
     document.getElementById('answers').innerHTML = rows.join('');
     showAnswerActions(answers);
-    updateUserAnswer(answers)
+    // updateUserAnswer(answers)
 }
 //post answer textarea
 function displayTextArea(question_id) {
@@ -106,6 +107,7 @@ function addAnswer(e) {
     return new Promise((resolve, reject) => {
         let answer_body = document.getElementById("answerBody").value;
         var id = e.id;
+        console.log(id);
         var data = JSON.stringify({
             "answer_body": answer_body
         });
@@ -133,16 +135,15 @@ function addAnswer(e) {
 }
 //displays the edit and mark as preferred actions on an answer
 function showAnswerActions(answers) {
-    console.log(answers);
     answers.forEach(function (answer) {
         var id = 'actions_' + answer.answer_id;
-        var rows=[];
-        var html = "<button class='btn btn-primary' id='myBtn'" + id + " onClick='function(this)'>Edit</button>";
+        // var rows=[];
+        var html = "<button class='btn btn-primary' id='myBtn" + id + "' onClick='function(this)'>Edit</button>";
         document.getElementById(id).innerHTML = html;
         // Get the modal
         var modal = document.getElementById('myModal');
         // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
+        var btn = document.getElementById("myBtn" + id);
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
         // When the user clicks the button, open the modal 
@@ -160,19 +161,21 @@ function showAnswerActions(answers) {
             }
         }
         // rows.push(html);
-        // document.getElementById('updateanswer').innerHTML = rows.join('');
+        // document.getElementById('updateanswer').value = 'Thoiru';
         updateUserAnswer();
     });
 }
-//Updates the answer
-function updateUserAnswer(answers) {
+// Updates the answer
+function updateUserAnswer() {
+    let answers = showAnswers();
     return new Promise((resolve, reject) => {
         // let answer_body = document.getElementById("updateAnswer");
-        var question_id=answers.question.id;
+        var question_id = answers.question_id;
         var answer_id = answers.answer_id;
         var data = JSON.stringify({
-        "question_id": question_id,
-        "answer_id" : answer_id})
+            "question_id": question_id,
+            "answer_id": answer_id
+        })
         console.log(data);
         fetch(url + 'questions/' + question_id + '/answers/' + answer_id, {
             method: 'PUT',
@@ -190,7 +193,7 @@ function updateUserAnswer(answers) {
                 resolve(data);
             })
             .catch(err => reject(err));
-        showAnswers({id:id});
+        showAnswers({ id: id });
         window.location.reload
 
     })
