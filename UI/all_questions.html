@@ -4,9 +4,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Questions</title>
     <link href="style.css" rel="stylesheet" />
+    <script>
+            // Preloader Timeout set
+          setTimeout(addclass,500);
+          function addclass(){
+              var body = document.getElementsByTagName('body');
+              body[0].classList.add('loaded');
+          }
+          
+          </script>
 </head>
 
 <body>
+    <!-- Preloader -->
+   <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+      </div>
     
     <div class="container-fluid">
     <div class="topnav">
