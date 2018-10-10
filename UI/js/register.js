@@ -17,10 +17,10 @@ function registration(evt)
         "confirmPassword":confirmPassword
     });
             fetch(url+'auth/signup',{
-              method: 'POST',
-              headers: {'Content-Type': 'application/json'},  
-              mode: "cors",
-              body: userInfo
+                method: 'POST',
+                mode: "cors",
+                headers: {'Content-Type': 'application/json'},
+                body:userInfo
             })
                 .then((response) => {
                     console.log(response);
