@@ -18,20 +18,15 @@ function askQuiz(evt)
         body: questionInfo
     })
     .then((response) => {
-        code = response.status
         return response.json()
     })
     .then((response) => {
-        if (code == 201){
-            document.getElementById("submitQuestion").reset();
+        if (response.status == 201){
             swal({
                 title: "Success!",
                 text: "Question successfully submitted!",
                 icon: "success",
               });
-            // alert("Question successfully submitted.")
-            // // return response.json();
-
         }
         if (code == 401){
             alert("A similar question has been posted")

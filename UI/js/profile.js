@@ -1,4 +1,3 @@
-
 const api = new Api;
 window.addEventListener('load', fetchAllQuestions);
 var url = 'https://stackoverflow-lite-ch3.herokuapp.com/api/v1/';
@@ -19,8 +18,9 @@ function fetchAllQuestions() {
                         + "id='" + question_id + "'>"
                         + "<a href='#'>" + i + ". " + question.title + "</a></h3>"
                         + "<p class='blockqoute'>" + question.body + "</p>"
-                        + "<span class='button' id='" + question.question_id + "'"
-                        + "onclick='showAnswers(this);'><button class='btn btn-primary'>View Answers >></button> </span>"
+                        + "<span  class='btn btn-primary' id='" + question.question_id + "'"
+                        + "onclick='showAnswers(" + question_id + ");'>"
+                        +"View Answers >> </span>"
                         +"<button class='btn btn-primary' id='" + question.question_id + "'onclick='deleteQuestion(this);'>Delete Question</button></span></br><hr>"
                         
                     all_questions.push(my_question);
@@ -32,7 +32,6 @@ function fetchAllQuestions() {
 }
 //deletes a question
 function deleteQuestion(e){
-    // console.log(question);
     return new Promise((resolve, reject) => {
         var question_id = e.id;
         console.log(question_id);
@@ -171,4 +170,3 @@ function markAsPreferred(answer) {
 
     })
 }
-
