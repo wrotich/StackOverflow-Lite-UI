@@ -74,7 +74,7 @@ function displayAnswer(answers) {
 //post answer textarea
 function displayTextArea(question_id) {
     var html = ""
-        + "<textarea id='answerBody' class='input_control' style='margin-left:0%' placeholder='Add Answer' required= true;></textarea>"
+        + "<textarea id='answerBody' class='input_control' style='margin-left:24%' placeholder='Add Answer' required= true;></textarea>"
         + "<br>"
         + "<button class='btn btn-primary' id='" + question_id + `' onclick='addAnswer(${question_id})'>Post Answer</button>`
         + "";
@@ -98,7 +98,6 @@ function addAnswer(question_id) {
             },
         })
             .then(data => {
-                console.log(data);
                 return data.json();
             })
             .then(data => {

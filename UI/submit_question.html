@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Questions</title>
     <link href="style.css" rel="stylesheet" />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -37,19 +36,22 @@
                 <center><h4> Submit your question below </h4></center>
                 <div class="content">
                     <form id="submitQuestion" class="submit" action="recentquestions.html" method="GET">
-                        <label style="margin-left:25%">Title</label>
-                        <textarea id="title" class="input_control" style="width: 50%" placeholder="Title" required></textarea>
+                        <label style="margin-left:8%">Title</label>
+                        <textarea id="title" class="input_control" style="width: 83%; margin-left:2em; height:32px;
+                        resize: none; color:#69306D" placeholder="Title" required></textarea>
                         <br/>
-                        <label style="margin-left:25%">Question</label>
-                        <textarea id="body" class="input_control" style="width: 50%" placeholder="Question" required></textarea>
+                        <label style="margin-left:8%">Question</label>
+                        <textarea id="body" class="input_control" style="width: 83%; margin-left:2em; height:12em;
+                        resize: none; color:#69306D" placeholder="Question" required></textarea>
                         <br/>
-                        <button style="margin-left:25%" class='btn btn-primary'>Submit Question</button>
+                        <button style="margin-left:8%" class='btn btn-primary'>Submit Question</button>
                     </form>
                 </div>
 
 
             </div>
 <script src="js/submit_question.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 
 </html>

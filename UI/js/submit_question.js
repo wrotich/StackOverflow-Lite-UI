@@ -3,9 +3,9 @@ let url = 'https://stackoverflow-lite-ch3.herokuapp.com/api/v1/';
 function askQuiz(evt)
 {   
     evt.preventDefault();
-    let title = document.getElementById("title").value;
-    let body = document.getElementById('body').value;
-    let questionInfo = JSON.stringify({
+    var title = document.getElementById("title").value;
+    var body = document.getElementById('body').value;
+    var questionInfo = JSON.stringify({
         "title": title,
         "body": body
     })
@@ -18,19 +18,16 @@ function askQuiz(evt)
         body: questionInfo
     })
     .then((response) => {
-        return response.json()
-    })
-    .then((response) => {
         if (response.status == 201){
+            document.getElementById("submitQuestion").reset();
             swal({
                 title: "Success!",
                 text: "Question successfully submitted!",
                 icon: "success",
               });
-        }
-        if (code == 401){
-            alert("A similar question has been posted")
-        }
-    })
+            window.location.reload
+        return response.json()
+            }
+        })
     .catch(err => reject(err));
 }
