@@ -1,11 +1,11 @@
 document.getElementById('search-form_3').addEventListener('submit', searchResult);
 var url = 'https://stackoverflow-lite-ch3.herokuapp.com/api/v1/';
-function searchResult() { 
+function searchResult() {
     return new Promise((resolve, reject) => {
-    fetch(url + '/questions/results',{
-        method: 'GET',
-        headers: {'Authorization':'Bearer '+ window.localStorage.getItem('auth_token')},
-    })
+        fetch(url + '/questions/results', {
+            method: 'GET',
+            headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('auth_token') },
+        })
             .then(response => {
                 return response.json();
             })
@@ -15,6 +15,6 @@ function searchResult() {
             })
             .catch(err => reject(err));
     });
-    document.getElementsByClassName('content')="Search results";
+    document.getElementsByClassName('content') = "Search results";
 
 }

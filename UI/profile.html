@@ -35,7 +35,13 @@
     </div>
 
     <div class="container">
-
+      <div class="searchcontainer">
+        <div class="field-input">
+            <span class="search-icon" ></span> 
+          <input type="text" placeholder="Search..."/>
+          <span></span>
+        </div>
+      </div>
       <div class="col-md-12">
         <div class="col-md-5" style="float: left">
           <div class="card" style="width: 18rem;margin-top: 30px;">
@@ -61,7 +67,7 @@
           <div class="modal-content">
             <span id="updateanswer" class="close">&times;</span>
             <textarea class='input_control' style='margin-left:0%' id="updateAnswer"></textarea><br>
-            <button id="updateBtn" onclick="updateUserAnswer(this)">Update</button>
+            <button id="updateBtn" class="btn btn-primary" onclick="updateUserAnswer(this)">Update</button>
           </div>
         </div>
       </div>

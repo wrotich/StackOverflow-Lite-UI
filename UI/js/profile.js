@@ -31,7 +31,6 @@ function fetchAllQuestions() {
 function deleteQuestion(e) {
     return new Promise((resolve, reject) => {
         var question_id = e.id;
-        console.log(question_id);
         fetch(url + 'questions/' + question_id, {
             method: 'DELETE',
             headers: {
@@ -40,12 +39,11 @@ function deleteQuestion(e) {
             },
         })
             .then((response) => {
-                statusCode = response.status
                 resolve(response);
                 return response.json()
             })
             .then((response) => {
-                if (statusCode == 200) {
+                if (response.status == 200) {
                     swal({
                         title: "Are you sure?",
                         text: "Once deleted, you will not be able to recover this Question!",
@@ -63,7 +61,7 @@ function deleteQuestion(e) {
                             }
                         });
                 }
-                if (statusCode == 401) {
+                if (response.status == 401) {
                     swal("You are not allowed to delete this question");
                 }
             })
@@ -113,7 +111,7 @@ function displayAnswer(answers) {
     document.getElementById('answers').innerHTML = rows.join('');
     showAnswerActions(answers);
 }
-//displays the edit and mark as preferred actions on an answer
+//displays the mark as preferred action on an answer
 function showAnswerActions(answers) {
     answers.forEach(function (answer) {
         var id = 'actions_' + answer.answer_id;
@@ -124,15 +122,15 @@ function showAnswerActions(answers) {
 }
 //Updates the answer
 function markAsPreferred(answer) {
-    console.log(answer)
     return new Promise((resolve, reject) => {
-        let answer_body = answer.answer_body;
+        var img = document.getElementById("markedAnswer");
         var question_id = answer.question_id;
-        var answer_id = answer.answer_id;
-        var data = {
-            "answer_body": answer_body,
-        }
-        fetch(url + 'questions/' + question_id + '/answers/' + answer_id, {
+        var id = answer.answer_id;
+        var answer_body = answer.answer_body;
+        var data = JSON.stringify({
+            "answer_body": answer_body
+        })
+        fetch(url + 'questions/' + question_id + '/answers/' + id + '/accepted', {
             method: 'PUT',
             mode: 'cors',
             body: data,
@@ -143,7 +141,7 @@ function markAsPreferred(answer) {
         })
             .then((response) => {
                 if (response.status === 200) {
-                    document.getElementById("markedAnswer").style.display = 'block';
+                    img.style.display = "flex";
                     showAnswers(question_id);
                 }
             })
