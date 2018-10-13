@@ -15,7 +15,7 @@ function fetchAllQuestions() {
                 var question_id = question.question_id;
                 var my_question = "<h3 onclick='showAnswers(" + question_id + ");'"
                     + "id='" + question_id + "'>"
-                    + "<a href='#'>" + i + ". " + question.title + "</a></h3>"
+                    + "<a href='#' style='text-decoration: none;color:#69306D'>" + i + ". " + question.title + "</a></h3>"
                     + "<p class='blockqoute'>" + question.body + "</p>"
                     + "<span class='button btn btn-primary' id='" + question_id + "'"
                     + "onclick='showAnswers(" + question_id + ");'>View Answers >> </span></br><hr>"
@@ -23,6 +23,9 @@ function fetchAllQuestions() {
 
             });
             document.getElementById('all_questions').innerHTML = all_questions.join('');
+            if(data.response == 401){
+                document.getElementById('all_questions').innerHTML = "Error, Token Expired, please login again"
+            }
         })
         .catch((err) => console.log("An error Occurred " + err));
 }

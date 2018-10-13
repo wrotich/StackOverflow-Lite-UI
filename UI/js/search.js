@@ -1,6 +1,6 @@
-document.getElementById('search-form_3').addEventListener('submit', searchResult);
+document.getElementById('searchButton').addEventListener('submit', searchQuestion);
 var url = 'https://stackoverflow-lite-ch3.herokuapp.com/api/v1/';
-function searchResult() {
+function searchQuestion() {
     return new Promise((resolve, reject) => {
         fetch(url + '/questions/results', {
             method: 'GET',
@@ -15,6 +15,4 @@ function searchResult() {
             })
             .catch(err => reject(err));
     });
-    document.getElementsByClassName('content') = "Search results";
-
 }

@@ -15,7 +15,7 @@ function fetchAllQuestions() {
                 var question_id = question.question_id;
                 var my_question = "<h3 onclick='showAnswers(" + question_id + ");'"
                     + "id='" + question_id + "'>"
-                    + "<a href='#'>" + i + ". " + question.title + "</a></h3>"
+                    + "<a href='#' style='text-decoration: none;color:#69306D'>" + i + ". " + question.title + "</a></h3>"
                     + "<p class='blockqoute'>" + question.body + "</p>"
                     + "<span  class='btn btn-primary' id='" + question.question_id + "'"
                     + "onclick='showAnswers(" + question_id + ");'>"
@@ -38,35 +38,35 @@ function deleteQuestion(e) {
                 'Authorization': 'Bearer ' + window.localStorage.getItem('auth_token')
             },
         })
-            .then((response) => {
-                resolve(response);
-                return response.json()
-            })
-            .then((response) => {
-                if (response.status == 200) {
-                    swal({
-                        title: "Are you sure?",
-                        text: "Once deleted, you will not be able to recover this Question!",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                        .then((willDelete) => {
-                            if (willDelete) {
-                                swal("Ok! Your Question file has been deleted!", {
-                                    icon: "success",
-                                });
-                            } else {
-                                swal("Your question is safe!");
-                            }
-                        });
-                }
-                if (response.status == 401) {
-                    swal("You are not allowed to delete this question");
-                }
-            })
-            .catch(err => reject(err));
-    })
+        .then((response) => {
+            resolve(response);
+            return response.json()
+        })
+        .then((response) => {
+            if (response.status == 200) {
+                swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this Question!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            swal("Ok! Your Question file has been deleted!", {
+                                icon: "success",
+                            });
+                        } else {
+                            swal("Your question is safe!");
+                        }
+                    });
+            }
+            if (response.status == 401) {
+                swal("You are not allowed to delete this question");
+            }
+        })
+        .catch(err => reject(err));
+})
 }
 //show answer
 function showAnswers(question_id) {
@@ -116,7 +116,7 @@ function showAnswerActions(answers) {
     answers.forEach(function (answer) {
         var id = 'actions_' + answer.answer_id;
         var html = "<button id='myBtn' class='btn btn-primary' onClick='markAsPreferred(" + JSON.stringify(answer) + ");'>Mark As Preferred</button>"
-            + "<img id='markedAnswer' src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI4Ni4wNTQgMjg2LjA1NCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjg2LjA1NCAyODYuMDU0OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIGNsYXNzPSIiPjxnIHRyYW5zZm9ybT0ibWF0cml4KDAuMTMzOTggMCAwIDAuMTMzOTggMTIzLjg2NCAxMjMuODY0KSI+PGc+Cgk8cGF0aCBzdHlsZT0iZmlsbDojNjAxODU2IiBkPSJNMTQzLjAzMSwwQzY0LjAyNywwLDAuMDA0LDY0LjA0LDAuMDA0LDE0My4wMjdjMCw3OC45OTYsNjQuMDMxLDE0My4wMjcsMTQzLjAyNywxNDMuMDI3ICAgYzc4Ljk4NywwLDE0My4wMTgtNjQuMDMxLDE0My4wMTgtMTQzLjAyN0MyODYuMDQ5LDY0LjA0OSwyMjIuMDE4LDAsMTQzLjAzMSwweiBNMTQzLjAzMSwyNTkuMjM2ICAgYy02NC4xODMsMC0xMTYuMjA5LTUyLjAyNi0xMTYuMjA5LTExNi4yMDlTNzguODU3LDI2LjgxOCwxNDMuMDMxLDI2LjgxOHMxMTYuMiw1Mi4wMjYsMTE2LjIsMTE2LjIwOSAgIFMyMDcuMjA2LDI1OS4yMzYsMTQzLjAzMSwyNTkuMjM2eiBNMTk5LjI0MSw4Mi4xODdjLTYuMDc5LTMuNjI5LTEzLjg0Ny0xLjQ3NS0xNy4zNDIsNC44MjdsLTQ3Ljk1OSw4Ni4xNDdsLTI2LjcxLTMyLjUxMiAgIGMtNC44MzYtNS41NjktMTEuMjYzLTguNDU2LTE3LjMzMy00LjgyN2MtNi4wNzksMy42MzgtOC41OTEsMTIuMzktNC42NTcsMTguMDA0bDM3LjE2OSw0NS4yNDFjMi43OCwzLjYxMSw1Ljk1Myw1Ljc3NSw5LjI3LDYuMzkyICAgbDAuMDI3LDAuMDU0bDAuMzQsMC4wMThjMC43NTEsMC4xMTYsMTEuOTc5LDIuMTksMTYuODE1LTYuNDYzbDU1LjA0OC05OC44NzZDMjA3LjQwMiw5My44NzksMjA1LjMyLDg1LjgyNSwxOTkuMjQxLDgyLjE4N3oiIGRhdGEtb3JpZ2luYWw9IiMzREIzOUUiIGNsYXNzPSJhY3RpdmUtcGF0aCIgZGF0YS1vbGRfY29sb3I9IiM0MjA5M0EiPjwvcGF0aD4KPC9nPjwvZz4gPC9zdmc+' style='display:none'></img>";
+            // + "<img id='markedAnswer' src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI4Ni4wNTQgMjg2LjA1NCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjg2LjA1NCAyODYuMDU0OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIGNsYXNzPSIiPjxnIHRyYW5zZm9ybT0ibWF0cml4KDAuMTMzOTggMCAwIDAuMTMzOTggMTIzLjg2NCAxMjMuODY0KSI+PGc+Cgk8cGF0aCBzdHlsZT0iZmlsbDojNjAxODU2IiBkPSJNMTQzLjAzMSwwQzY0LjAyNywwLDAuMDA0LDY0LjA0LDAuMDA0LDE0My4wMjdjMCw3OC45OTYsNjQuMDMxLDE0My4wMjcsMTQzLjAyNywxNDMuMDI3ICAgYzc4Ljk4NywwLDE0My4wMTgtNjQuMDMxLDE0My4wMTgtMTQzLjAyN0MyODYuMDQ5LDY0LjA0OSwyMjIuMDE4LDAsMTQzLjAzMSwweiBNMTQzLjAzMSwyNTkuMjM2ICAgYy02NC4xODMsMC0xMTYuMjA5LTUyLjAyNi0xMTYuMjA5LTExNi4yMDlTNzguODU3LDI2LjgxOCwxNDMuMDMxLDI2LjgxOHMxMTYuMiw1Mi4wMjYsMTE2LjIsMTE2LjIwOSAgIFMyMDcuMjA2LDI1OS4yMzYsMTQzLjAzMSwyNTkuMjM2eiBNMTk5LjI0MSw4Mi4xODdjLTYuMDc5LTMuNjI5LTEzLjg0Ny0xLjQ3NS0xNy4zNDIsNC44MjdsLTQ3Ljk1OSw4Ni4xNDdsLTI2LjcxLTMyLjUxMiAgIGMtNC44MzYtNS41NjktMTEuMjYzLTguNDU2LTE3LjMzMy00LjgyN2MtNi4wNzksMy42MzgtOC41OTEsMTIuMzktNC42NTcsMTguMDA0bDM3LjE2OSw0NS4yNDFjMi43OCwzLjYxMSw1Ljk1Myw1Ljc3NSw5LjI3LDYuMzkyICAgbDAuMDI3LDAuMDU0bDAuMzQsMC4wMThjMC43NTEsMC4xMTYsMTEuOTc5LDIuMTksMTYuODE1LTYuNDYzbDU1LjA0OC05OC44NzZDMjA3LjQwMiw5My44NzksMjA1LjMyLDg1LjgyNSwxOTkuMjQxLDgyLjE4N3oiIGRhdGEtb3JpZ2luYWw9IiMzREIzOUUiIGNsYXNzPSJhY3RpdmUtcGF0aCIgZGF0YS1vbGRfY29sb3I9IiM0MjA5M0EiPjwvcGF0aD4KPC9nPjwvZz4gPC9zdmc+' style='display:none'></img>";
         document.getElementById(id).innerHTML = html;
     });
 }
@@ -141,7 +141,7 @@ function markAsPreferred(answer) {
         })
             .then((response) => {
                 if (response.status === 200) {
-                    img.style.display = "flex";
+                    document.getElementById('all_questions').innerHTML = img;
                     showAnswers(question_id);
                 }
             })
