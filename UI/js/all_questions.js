@@ -4,7 +4,6 @@ var url = 'https://stackoverflow-lite-ch3.herokuapp.com/api/v1/';
 function fetchAllQuestions() {
     api.getQuestions()
         .then((data) => {
-
             var data = data.results;
             data.sort(function (a, b) {
                 return b.question_id - a.question_id;
@@ -16,7 +15,7 @@ function fetchAllQuestions() {
                 var question_id = question.question_id;
                 var my_question = "<h3 onclick='showAnswers(" + question_id + ");'"
                     + "id='" + question_id + "'>"
-                    + "<a href='#'>" + i + ". " + question.title + "</a></h3>"
+                    + "<a href='#' style='text-decoration: none;color:#69306D'>" + i + ". " + question.title + "</a></h3>"
                     + "<p class='blockqoute'>" + question.body + "</p>"
                     + "<span class='button btn btn-primary' id='" + question_id + "'"
                     + "onclick='showAnswers(" + question_id + ");'>View Answers >> </span></br><hr>"
@@ -24,44 +23,44 @@ function fetchAllQuestions() {
 
             });
             document.getElementById('all_questions').innerHTML = all_questions.join('');
+            if(data.response == 401){
+                document.getElementById('all_questions').innerHTML = "Error, Token Expired, please login again"
+            }
         })
         .catch((err) => console.log("An error Occurred " + err));
 }
 //show answer
 function showAnswers(question_id) {
-    if (question_id != '' && question_id != undefined) {
-        fetch(url + 'questions/' + question_id, {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + window.localStorage.getItem('auth_token')
-            },
+    fetch(url + 'questions/' + question_id, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + window.localStorage.getItem('auth_token')
+        },
 
+    })
+        .then((resp) => {
+            http_code = resp.status
+            return resp.json();
         })
-            .then((resp) => {
-                http_code = resp.status
-                return resp.json();
-            })
-            .then((resp) => {
-                if (http_code == 200) {
-                    resp = resp.results
-                    var question = resp.question;
-                    var answers = resp.answers;
-                    var question = question[0];
-                    document.getElementById('all_questions').innerHTML = "<h3>" + question.title + "</h3>"
-                        + "<p>" + question.body + "</p>"
-                        + "Posted on: " + question.created_at
-                        + "<h4>Answers (" + answers.length + ")</h4>"
-                        + "<span id='answers'></span>";
-                    displayAnswer(answers);
-                    displayTextArea(question.question_id);
-                    return answers;
-                }
-            });
-    }
+        .then((resp) => {
+            if (http_code == 200) {
+                resp = resp.results
+                var question = resp.question;
+                var answers = resp.answers;
+                var question = question[0];
+                document.getElementById('all_questions').innerHTML = "<h3>" + question.title + "</h3>"
+                    + "<p>" + question.body + "</p>"
+                    + "Posted on: " + question.created_at
+                    + "<h4>Answers (" + answers.length + ")</h4>"
+                    + "<span id='answers'></span>";
+                displayAnswer(answers);
+                displayTextArea(question.question_id);
+                return answers;
+            }
+        });
 }
-
 //Display the answer after it has been posted
 function displayAnswer(answers) {
     var rows = [];
@@ -78,7 +77,7 @@ function displayAnswer(answers) {
 //post answer textarea
 function displayTextArea(question_id) {
     var html = ""
-        + "<textarea id='answerBody' class='input_control' style='margin-left:0%' placeholder='Add Answer' required= true;></textarea>"
+        + "<textarea id='answerBody' class='input_control' style='margin-left:24%' placeholder='Add Answer' required= true;></textarea>"
         + "<br>"
         + "<button class='btn btn-primary' id='" + question_id + `' onclick='addAnswer(${question_id})'>Post Answer</button>`
         + "";
@@ -110,63 +109,56 @@ function addAnswer(question_id) {
             .catch(err => reject(err));
         window.location.reload
         showAnswers(id);
-
-
-
     });
 }
 //displays the edit and mark as preferred actions on an answer
 function showAnswerActions(answers) {
     answers.forEach(function (answer) {
         var id = 'actions_' + answer.answer_id;
-        var html = "<button class='btn btn-primary' id='myBtn" + id + "' onClick='function(this)'>Edit</button>";
+        var html = "<button class='btn btn-primary' id='myBtn" + answer.answer_id + "' data-toggle='modal' data-target='#myModal" + answer.answer_id + "'>Edit</button>";
         document.getElementById(id).innerHTML = html;
-        var modal = document.getElementById('myModal');
-        var btn = document.getElementById("myBtn" + id);
-        var span = document.getElementsByClassName("close")[0];
-        btn.onclick = function () {
-            modal.style.display = "block";
-        }
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-        updateUserAnswer(answer)
-
     });
+    var models = [];
+    answers.forEach(function (answer) {
+        var html = "<div id='myModal" + answer.answer_id + "' class='modal'>"
+            + "<div class='modal-content'>"
+            + " <span class='close' data-dismiss='modal'>&times;</span>"
+            + "<textarea class='textarea' id='newAnswer" + answer.answer_id + "'>" + answer.answer_body + "</textarea><br>"
+            + "<button class='btn btn-primary' id='updateBtn' onclick='updateUserAnswer(" + JSON.stringify(answer) + ");'>Update</button>"
+            + "</div>"
+            + "</div>";
+        models.push(html);
+    });
+    document.getElementById('includes').innerHTML = models.join("");
 }
 // Updates the answer
 function updateUserAnswer(answer) {
-    console.log(answer);
     return new Promise((resolve, reject) => {
+        var modal = document.getElementById("myModal" + answer.answer_id)
         var question_id = answer.question_id;
         var id = answer.answer_id;
-        var answer_body = answer.answer_body;
-        console.log(answer_body);
+        var answer_body = document.getElementById("newAnswer" + answer.answer_id).value;
         var data = JSON.stringify({
             "answer_body": answer_body
         })
         fetch(url + 'questions/' + question_id + '/answers/' + id, {
             method: 'PUT',
             mode: 'cors',
-            redirect: 'follow',
             body: data,
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + window.localStorage.getItem('auth_token')
             },
         })
-            .then(data => {
-                return data.json();
+            .then((response) => {
+                if (response.status === 200) {
+                    modal.style.display = "none"
+                    showAnswers(question_id);
+                }
             })
             .then(data => {
                 resolve(data);
             })
             .catch(err => reject(err));
-        window.location.reload
     })
 }

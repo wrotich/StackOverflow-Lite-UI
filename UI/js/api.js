@@ -19,6 +19,21 @@ class Api{
         })
     })
     }
+    getUserQuestions(){
+        return new Promise((resolve, reject)=>{
+            fetch(url+"users/questions",{
+                headers: {'Authorization':'Bearer '+ this.access_token}
+        })
+        .then((response)=>{
+           if (response.status==200){
+               resolve(response.json());
+           }
+           else{
+               reject(response);
+           }
+        })
+    })
+    }
 
     async getSingleQuestion(url){
         const myQuestion = await fetch(url,{headers: {'Authorization':'Bearer '+ this.access_token}});

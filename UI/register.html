@@ -1,47 +1,70 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sign Up</title>
-<link href="style.css" rel="stylesheet"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign Up</title>
+  <link href="style.css" rel="stylesheet" />
+  <script>
+    // Preloader Timeout set
+    setTimeout(addclass, 500);
+    function addclass() {
+      var body = document.getElementsByTagName('body');
+      body[0].classList.add('loaded');
+    }
+
+  </script>
 </head>
-<body>     
-    <div class="content1">
-        <header>
+
+<body>
+  <!-- Preloader -->
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+  </div>
+  <div class="content1">
+    <header>
       <br>
       <div class="container1">
         <p>StackOverflow Lite</p>
-        
+
       </div>
     </header>
     <div id="register-box">
-        <center><p id= "error" style="color:red"></p></center>
+      <center>
+        <p id="error" style="color:red"></p>
+      </center>
       <div class="container">
         <form id="signup">
-      <input type="text" name="username" placeholder="Username" class="inputs0" id="username"required>
-      <input type="email" name="email" placeholder="Email" class="inputs1" id="email"required >
-      <input type="password" name="password" placeholder="Password" class="inputs2" id="password"required>
-      <input type="password" name="confirmPassword" placeholder="Confirm Password" class="inputs3" id="confirmPassword"required>
-      <input type="submit" name="submit" value="Register" class="inputs4"><br>
-      <span class="links"><center><a href="index.html">Already have an account?</a></center></span>
-    </form>
+          <input type="text" name="username" placeholder="Username" class="inputs0" id="username" required>
+          <input type="email" name="email" placeholder="Email" class="inputs1" id="email" required>
+          <input type="password" name="password" placeholder="Password" class="inputs2" id="password" required>
+          <input type="password" name="confirmPassword" placeholder="Confirm Password" class="inputs3" id="confirmPassword"
+            required>
+          <input type="submit" name="submit" value="Register" class="inputs4"><br>
+          <span class="links">
+            <center><a href="index.html" style="font-weight:bold">Already have an account?</a></center>
+          </span>
+        </form>
       </div>
     </div>
-<script>
-let password = document.getElementById("password");
-let confirmPassword = document.getElementById("confirmPassword");
+    <script>
+      let password = document.getElementById("password");
+      let confirmPassword = document.getElementById("confirmPassword");
 
-function validatePassword(){
-  if(password.value != confirmPassword.value) {
-    confirmPassword.setCustomValidity("Passwords Don't Match");
-  } else {
-    confirmPassword.setCustomValidity('');
-  }
-}
-password.onchange = validatePassword;
-confirmPassword.onkeyup = validatePassword;
+      function validatePassword() {
+        if (password.value != confirmPassword.value) {
+          confirmPassword.setCustomValidity("Passwords Don't Match");
+        } else {
+          confirmPassword.setCustomValidity('');
+        }
+      }
+      password.onchange = validatePassword;
+      confirmPassword.onkeyup = validatePassword;
 
-</script>
-<script src="js/register.js"></script>
+    </script>
+    <script src="js/register.js"></script>
 </body>
+
 </html>
