@@ -1,5 +1,6 @@
-document.getElementById('signin').addEventListener('submit', login);
 
+document.getElementById('signin').addEventListener('submit', login);
+const url = 'https://stackoverflow-lite-ch3.herokuapp.com/api/v1/';
 function login(event){
   event.preventDefault();
   let email= document.getElementById("email").value;
@@ -9,8 +10,8 @@ function login(event){
         "password":password,
     })
 
-    console.log("before fetch")
-    fetch('https://stackoverflow-lite-ch3.herokuapp.com/api/v1/auth/login', {
+    console.log(userInfo);
+    fetch(url + 'auth/login', {
         method: 'POST',
         mode: "cors",
         headers: {'Content-Type': 'application/json'},

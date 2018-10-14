@@ -1,4 +1,5 @@
 document.getElementById('submitQuestion').addEventListener('submit', askQuiz);
+let url = 'https://stackoverflow-lite-ch3.herokuapp.com/api/v1/';
 function askQuiz(evt)
 {   
     evt.preventDefault();
@@ -9,7 +10,7 @@ function askQuiz(evt)
         "body": body
     })
     console.log('This is the start of fetch')
-    fetch('https://stackoverflow-lite-ch3.herokuapp.com/api/v1/questions', {
+    fetch(url+'questions', {
         method: 'POST',
         mode: "cors",
         headers: { 'Content-Type': 'application/json',
@@ -23,8 +24,13 @@ function askQuiz(evt)
     .then((response) => {
         if (code == 201){
             document.getElementById("submitQuestion").reset();
-            alert("Question successfully submitted.")
-            // return response.json();
+            swal({
+                title: "Success!",
+                text: "Question successfully submitted!",
+                icon: "success",
+              });
+            // alert("Question successfully submitted.")
+            // // return response.json();
 
         }
         if (code == 401){

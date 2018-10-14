@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,28 +5,31 @@
 <title>Sign Up</title>
 <link href="style.css" rel="stylesheet"/>
 </head>
-<div class="container-fluid">
-	<div class="centered">
-      <center><h1>StackOverflow-Lite</h1>
-<p id= "error" style="color:red"></p></center>
-  <form id="registration" method="POST">
-<label style="margin-left:25%">Email</label>
-<input name="email" type="email" class="input_control" placeholder="email@someone.com" id="email" required/><br>
-<label style="margin-left:25%">Username</label>
-<input name="username" class="input_control" placeholder="username" id="username" required/><br>
-<label style="margin-left:25%">Password</label>
-<input placeholder="Password" name="password" class="input_control" type="password" id="password" required/> <br>
-<label style="margin-left:25%">Password</label>
-<input placeholder="Confirm password" name="password_confirm" class="input_control" type="password" id="confirmPassword" required/><br>   
-<button style="margin-left:25%" type="submit" class="button" onkeypress="validatePassword()">Sign up</button>
-<br/>
-<a style="margin-left:25%" href="index.html">I have an account</a>
-</form>
-</div>
-</div>
+<body>     
+    <div class="content1">
+        <header>
+      <br>
+      <div class="container1">
+        <p>StackOverflow Lite</p>
+        
+      </div>
+    </header>
+    <div id="register-box">
+        <center><p id= "error" style="color:red"></p></center>
+      <div class="container">
+        <form id="signup">
+      <input type="text" name="username" placeholder="Username" class="inputs0" id="username"required>
+      <input type="email" name="email" placeholder="Email" class="inputs1" id="email"required >
+      <input type="password" name="password" placeholder="Password" class="inputs2" id="password"required>
+      <input type="password" name="confirmPassword" placeholder="Confirm Password" class="inputs3" id="confirmPassword"required>
+      <input type="submit" name="submit" value="Register" class="inputs4"><br>
+      <span class="links"><center><a href="index.html">Already have an account?</a></center></span>
+    </form>
+      </div>
+    </div>
 <script>
-var password = document.getElementById("password");
-var confirmPassword = document.getElementById("confirmPassword");
+let password = document.getElementById("password");
+let confirmPassword = document.getElementById("confirmPassword");
 
 function validatePassword(){
   if(password.value != confirmPassword.value) {
