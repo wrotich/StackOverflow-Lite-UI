@@ -10,7 +10,7 @@ function login(event){
     })
 
     console.log("before fetch")
-    fetch('http://127.0.0.1:5000/api/v1/auth/login', {
+    fetch('https://stackoverflow-lite-ch3.herokuapp.com/api/v1/auth/login', {
         method: 'POST',
         mode: "cors",
         headers: {'Content-Type': 'application/json'},
@@ -29,7 +29,7 @@ function login(event){
     if (data.message == 'Successfully logged in.') {
       window.localStorage.setItem('auth_token', data.auth_token)
       console.log(window.localStorage.getItem('auth_token'))
-      window.location = 'recentquestions.html'
+      window.location = 'all_questions.html'
   }
     else {
       document.getElementById("error").innerHTML = "Wrong credentials please try again";

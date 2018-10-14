@@ -9,7 +9,7 @@ function askQuiz(evt)
         "body": body
     })
     console.log('This is the start of fetch')
-    fetch('http://127.0.0.1:5000/api/v1/questions', {
+    fetch('https://stackoverflow-lite-ch3.herokuapp.com/api/v1/questions', {
         method: 'POST',
         mode: "cors",
         headers: { 'Content-Type': 'application/json',
@@ -24,11 +24,12 @@ function askQuiz(evt)
         if (code == 201){
             document.getElementById("submitQuestion").reset();
             alert("Question successfully submitted.")
+            // return response.json();
 
         }
         if (code == 401){
             alert("A similar question has been posted")
         }
     })
-    .catch((err) => console.log('An error Occurred '+err))
+    .catch(err => reject(err));
 }

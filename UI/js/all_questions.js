@@ -1,7 +1,7 @@
 
 window.addEventListener('load', fetchAllQuestions);
 function fetchAllQuestions() { 
-    fetch('http://127.0.0.1:5000/api/v1/questions', {
+    fetch('https://stackoverflow-lite-ch3.herokuapp.com/api/v1/questions/', {
         method: 'GET',
         mode:'cors',
         headers: { 'Content-Type': 'application/json',
@@ -12,8 +12,11 @@ function fetchAllQuestions() {
               return resp.json()
           })
           .then((data) => {
-              if (http_code == 200) {
-                 var data =data.results;
+            if (http_code == 200) {
+                var data =data.results;
+               data.sort(function(a,b) {
+                   return b.question_id-a.question_id;
+               });
                  var all_questions=[];
                     data.forEach(question => {
                     var my_question="<h4 onclick='showAnswers(this);'"
@@ -40,7 +43,7 @@ function fetchAllQuestions() {
 function deleteQuestion(e){
     return new Promise((resolve, reject) => {
     var question_id=e.id;
-    fetch('http://127.0.0.1:5000/api/v1/questions/'+question_id,{
+    fetch('https://stackoverflow-lite-ch3.herokuapp.com/api/v1/questions/'+question_id,{
         method: 'DELETE',
         mode:'cors',
         headers: { 'Content-Type': 'application/json',
@@ -68,7 +71,7 @@ function deleteQuestion(e){
 //show answer
 function showAnswers(e){
    var question_id=e.id;
-   fetch('http://127.0.0.1:5000/api/v1/questions/'+question_id, {
+   fetch('https://stackoverflow-lite-ch3.herokuapp.com/api/v1/questions/'+question_id, {
        method: 'GET',
        mode:'cors',
        headers: { 'Content-Type': 'application/json',
@@ -87,7 +90,7 @@ function showAnswers(e){
           var question=question[0];
       document.getElementById('all_questions').innerHTML="<h3>"+question.title+"</h3>"
       +"<p>"+question.body+"</p>"
-      +"Post on: "+question.created_at
+      +"Posted on: "+question.created_at
       +"<h4>Answers ("+answers.length+")</h4>"
       +"<span id='answers'></span>";
 
@@ -97,16 +100,19 @@ function showAnswers(e){
       } 
    });
 }
-//show answer
+
+//Display the answer after it has been posted
 function displayAnswer(answers) {
     var rows=[];
     answers.forEach(answer => {
-       var my_answer= "postedBy: "+answer.user_id+"<br><p>"+answer.answer_body+"</p><hr/><br>";
+       var my_answer= "postedBy: "+answer.username+"<br><p>"+answer.answer_body+"</p><br>"
+       +"<span id='actions_"+answer.answer_id+"'></span><br/><hr/>";
        rows.push(my_answer);
+       
    });
     rows.push("<span id='textarea_display'></span>");
    document.getElementById('answers').innerHTML=rows.join('');
-
+showAnswerActions(answers);
 }
 //post answer textarea
 function displayTextArea(question_id){
@@ -125,7 +131,7 @@ function addAnswer(e){
     var data = JSON.stringify({
       "answer_body": answer_body
   });
-  fetch("http://127.0.0.1:5000/api/v1/questions/"+id+"/answers",{
+  fetch("https://stackoverflow-lite-ch3.herokuapp.com/api/v1/questions/"+id+"/answers",{
         method: 'POST',
         mode:'cors',
         body: data,
@@ -145,9 +151,20 @@ function addAnswer(e){
 
 });
 }
+//displays the edit and mark as preferred actions on an answer
+ function showAnswerActions(answers){
+    answers.forEach(function(answer){
+    
+        var id= 'actions_'+answer.answer_id;
+        answer_body=answer.answer_body;
+        document.getElementById(id).innerHTML="<button id="
+        +answer.answer_id+"' onClick='showEditAnswer(this,"
+        +answer_body.toString()+")'>Edit</button> <button>Mark Preferred</button>";
 
-function editAnswerBtn(){
-    var html = "<p></p>"
-    +"<button id='edit' onclick= 'editAnswer(this)' class='button'>Edit Answer</button>";
-    document.getElementById('edit').innerHTML=html;
-}
+    });
+ }
+
+
+ function showEditAnswer(e,answer_body){
+     alert(answer_body);
+ }

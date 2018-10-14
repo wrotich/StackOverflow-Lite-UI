@@ -15,7 +15,7 @@ function registration(evt)
         "password":password,
         "confirmPassword":confirmPassword
     });
-            fetch('http://127.0.0.1:5000/api/v1/auth/signup',{
+            fetch('https://stackoverflow-lite-ch3.herokuapp.com/api/v1/auth/signup',{
               method: 'POST',
               headers: {'Content-Type': 'application/json'},  
               mode: "cors",
@@ -28,7 +28,7 @@ function registration(evt)
                 })
                 .then((response) => {
                     if (status_code == 201){
-                        window.location = 'login.html';
+                        window.location = 'index.html';
                     }
                     if (status_code == 401){
                         document.getElementById("error").innerHTML = "User already exists please login";

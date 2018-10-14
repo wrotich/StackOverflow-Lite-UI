@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Questions</title>
@@ -9,30 +8,32 @@
 
 <body>
     
-    <div class="container">
+    <div class="container-fluid">
     <div class="topnav">
-
-            <a href="recentquestions.html">StackOverflow-Lite</a>
-            <a class="active" href="all_questions.html">All Questions</a>
-            <a href="submit_question.html">Submit Question</a>  
-            <a href="profile.html">Profile</a>
-            <a href="login.html" style="float: right">Logout</a>
-            <form id="search-form_3">
-                    <input type="text" class="search_3" placeholder="Search..." required/>
-                    <input type="submit" class="submit_3" value="Search" />
-                    </form>
+            <a class="active" href="all_questions.html">StackOverflow Lite</a>
+        <div class="dropdown">
+            <button class="dropbtn">user
+            </button>
+            <div class="dropdown-content">
+            <a href="submit_question.html">Submit Question</a>
+            <a href="profile.html">My Account</a>
+            <a href="index.html">Logout</a>
+    </div>
+  </div>
         </div>
+        
 
         <div class="full_12">
 
 
             <div class="full_12">
-                <div class="content" id="all_questions">
+
                    </div>
                    </div>
                    </div>
-                   </div>
+            
                    
 <script src="js/all_questions.js"></script>
+<script src="js/search.js"></script>
 </body>
 </html>
