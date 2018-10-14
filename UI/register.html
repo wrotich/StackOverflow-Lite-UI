@@ -8,21 +8,38 @@
 </head>
 <div class="container">
 	<div class="centered">
-<h1><center>StackOverflow-Lite</center></h1>
-
-  <form id="register-form"  method="POST" action="sign_in">
-<label>Email</label>
-<input name="email" type="email" class="input_control" placeholder="email@someone.com"/><br>
-<label>Password</label>
-<input placeholder="Password" name="password" class="input_control" type="password"/> <br>
-<label>Password</label>
-<input placeholder="Confirm password" name="password_confirm" class="input_control" type="password"/><br>   
-<button type="submit" class="button">Sign up</button>
+      <center><h1>StackOverflow-Lite</h1>
+<p id= "error" style="color:red"></p></center>
+  <form id="registration" method="POST">
+<label style="margin-left:25%">Email</label>
+<input name="email" type="email" class="input_control" placeholder="email@someone.com" id="email" required/><br>
+<label style="margin-left:25%">Username</label>
+<input name="username" class="input_control" placeholder="username" id="username" required/><br>
+<label style="margin-left:25%">Password</label>
+<input placeholder="Password" name="password" class="input_control" type="password" id="password" required/> <br>
+<label style="margin-left:25%">Password</label>
+<input placeholder="Confirm password" name="password_confirm" class="input_control" type="password" id="confirmPassword" required/><br>   
+<button style="margin-left:25%" type="submit" class="button" onkeypress="validatePassword()">Sign up</button>
 <br/>
-<a href="login.html">I have an account</a>
+<a style="margin-left:25%" href="login.html">I have an account</a>
 </form>
 </div>
 </div>
+<script>
+var password = document.getElementById("password");
+var confirmPassword = document.getElementById("confirmPassword");
 
+function validatePassword(){
+  if(password.value != confirmPassword.value) {
+    confirmPassword.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirmPassword.setCustomValidity('');
+  }
+}
+password.onchange = validatePassword;
+confirmPassword.onkeyup = validatePassword;
+
+</script>
+<script src="js/register.js"></script>
 </body>
 </html>
