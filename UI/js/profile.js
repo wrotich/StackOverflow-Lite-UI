@@ -41,10 +41,11 @@ function deleteQuestion(e) {
         })
         .then((response) => {
             resolve(response);
-            return response.json()
+            // return response.json()
         })
         .then((response) => {
             if (response.status == 200) {
+                // window.location.reload(true);
                 swal({
                     title: "Are you sure?",
                     text: "Once deleted, you will not be able to recover this Question!",
@@ -61,6 +62,7 @@ function deleteQuestion(e) {
                             swal("Your question is safe!");
                         }
                     });
+                    window.location.reload(true);
             }
             if (response.status == 401) {
                 swal("You are not allowed to delete this question");

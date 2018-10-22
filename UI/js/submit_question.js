@@ -25,7 +25,7 @@ function askQuiz(evt)
                 text: "Question successfully submitted!",
                 icon: "success",
               });
-            window.location.reload
+            window.location = "all_questions.html";
         return response.json()
             }
         })

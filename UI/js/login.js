@@ -8,7 +8,6 @@ function login(event){
         "email":email,
         "password":password,
     })
-
     console.log(userInfo);
     fetch(url + 'auth/login', {
         method: 'POST',
@@ -17,7 +16,6 @@ function login(event){
         body:userInfo
         }
     )
-
   .then((req) => {
       http_code = req.status
       return req.json()
